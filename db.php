@@ -1,27 +1,25 @@
 <?php
-// --- DATABASE CONFIGURATION ---
 
-// Database credentials
-$servername = "localhost"; // Usually "localhost" for local development
-$username = "root";      // The default username for XAMPP/WAMP is "root"
-$password = "jawaan2720";  // Your MySQL password (it might be empty by default)
-$dbname = "rm_paramount_db"; // The name of your database
+// 1. Load the Composer autoloader (which has our new library)
+require_once __DIR__ . '/vendor/autoload.php';
 
-// --- CREATE AND CHECK CONNECTION ---
+// 2. Find and load the .env file
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-// Create a new mysqli connection object
+// 3. Get database credentials securely from the environment
+$servername = $_ENV['DB_HOST'];
+$username   = $_ENV['DB_USER'];
+$password   = $_ENV['DB_PASS'];
+$dbname     = $_ENV['DB_NAME'];
+
+// --- CREATE AND CHECK CONNECTION (this part is the same as before) ---
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check if the connection was successful
 if ($conn->connect_error) {
-    // If connection fails, stop the script and display an error message.
-    // In a production environment, you would handle this more gracefully,
-    // for example, by logging the error and showing a user-friendly message.
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Set the character set to utf8mb4 for better Unicode support (recommended)
 $conn->set_charset("utf8mb4");
 
 ?>
-

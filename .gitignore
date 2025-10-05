@@ -1,0 +1,5 @@
+# Ignore the file with secret credentials
+.env
+
+# Ignore the folder with code libraries
+/vendor/
